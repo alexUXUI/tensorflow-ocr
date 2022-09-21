@@ -1,4 +1,4 @@
-# LFG: A Template for Prototypes
+# tensorflow-ocr
 
 ## Up and running
 
@@ -9,4 +9,3 @@
 2. start app in dev mode
 
    `$ yarn start`
-# tensorflow-ocr
