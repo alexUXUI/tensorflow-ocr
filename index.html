@@ -8,19 +8,51 @@
     <link rel="stylesheet" href="style.css" />
 
     <!-- Import TensorFlow.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script> -->
     <!-- Import tfjs-vis -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.2/dist/tfjs-vis.umd.min.js"></script> -->
 
     <!-- Import the data file -->
-    <script src="data.js" type="module"></script>
+    <!-- <script src="data.js" type="module"></script> -->
 
     <!-- Import the main script file -->
     <script src="script.js" type="module"></script>
+
+    <!-- <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script> -->
   </head>
 
   <body>
     <h1 id="hello">Hello world</h1>
-    <script src="./bundle.js"></script>
+    <script>
+      var worker = new Tesseract.TesseractWorker();
+      var OEM = Tesseract.OEM;
+
+      worker
+        .recognize(
+          'https://cdn11.bigcommerce.com/s-wcgm8uhs45/images/stencil/1280x1280/products/271/851/Helvetica-Regular__29114.1585875169.jpg?c=2',
+          'eng',
+          {
+            init_oem: OEM.TESSERACT_ONLY,
+            tessedit_char_whitelist: '0123456789',
+          }
+        )
+        .progress(function (p) {
+          console.log(p);
+        })
+        .then(function (result) {
+          console.log(result);
+        });
+
+      Tesseract.recognize(
+        'https://tesseract.projectnaptha.com/img/eng_bw.png',
+        'eng',
+        { logger: (m) => console.log(m) }
+      ).then(({ data: { text } }) => {
+        console.log(text);
+      });
+    </script>
+    <!-- <script src="./bundle.js"></script> -->
+
+    <!-- https://i.etsystatic.com/15168893/r/il/07017c/3539527750/il_1588xN.3539527750_q1a3.jpg -->
   </body>
 </html>
